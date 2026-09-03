@@ -113,6 +113,12 @@ Preguntas que **no** están en el archivo (el agente debe admitir que no sabe):
 
 Después se escribe `Bye` para mostrar la salida del loop.
 
+## Video de demostración
+
+[Ver el video de demostración](docs/video-demostrativo.mp4) (33 segundos). Muestra preguntas que
+están en el archivo, preguntas que el agente admite no poder responder y la salida con
+`Bye` y con `Ctrl-C`.
+
 ## Estructura del repositorio
 
 ```
@@ -120,6 +126,8 @@ Después se escribe `Bye` para mostrar la salida del loop.
 ├── agent.py            # agente: carga la KB, la inyecta al prompt y corre el loop
 ├── data/
 │   └── FAQs_Parachute_SA_Guatemala_2026.txt
+├── docs/
+│   └── video-demostrativo.mp4
 ├── requirements.txt
 ├── .env.example        # plantilla de configuración (sin llaves reales)
 ├── .gitignore
