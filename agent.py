@@ -131,7 +131,7 @@ def main() -> None:
                 model=MODEL,
                 messages=messages,
                 temperature=0.2,  # baja temperatura = menos alucinación
-                max_tokens=500,
+                max_tokens=1024,  # incluye los tokens de razonamiento
             )
         except APIError as err:
             print(f"\n[ERROR] Falló la llamada al modelo: {err}")
@@ -141,7 +141,12 @@ def main() -> None:
             print("\n\nSesión terminada. ¡Gracias por consultar a Parachute S.A.!")
             break
 
-        answer = response.choices[0].message.content.strip()
+        answer = (response.choices[0].message.content or "").strip()
+        if not answer:
+            print("\n[ERROR] El modelo devolvió una respuesta vacía. Intente de nuevo.")
+            messages.pop()  # descartar el turno fallido
+            continue
+
         print(f"\nAgente > {answer}")
 
         # Se guarda la respuesta para mantener el contexto de la conversación.
