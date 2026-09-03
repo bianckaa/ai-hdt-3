@@ -57,7 +57,7 @@ Editar `.env` y colocar la llave:
 ```
 OPENAI_BASE_URL=https://api.groq.com/openai/v1
 OPENAI_API_KEY=gsk_...
-MODEL=llama-3.3-70b-versatile
+MODEL=openai/gpt-oss-120b
 ```
 
 El archivo `.env` está en `.gitignore`, así que **la API key nunca se sube al

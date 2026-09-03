@@ -21,7 +21,7 @@ load_dotenv()
 
 BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.groq.com/openai/v1")
 API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL = os.getenv("MODEL", "llama-3.3-70b-versatile")
+MODEL = os.getenv("MODEL", "openai/gpt-oss-120b")
 
 KB_PATH = Path(os.getenv("KB_PATH", "data/FAQs_Parachute_SA_Guatemala_2026.txt"))
 
