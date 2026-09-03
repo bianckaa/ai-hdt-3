@@ -23,7 +23,10 @@ BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.groq.com/openai/v1")
 API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL = os.getenv("MODEL", "openai/gpt-oss-120b")
 
-KB_PATH = Path(os.getenv("KB_PATH", "data/FAQs_Parachute_SA_Guatemala_2026.txt"))
+# Las rutas relativas se resuelven desde la carpeta de este archivo, para que el
+# agente funcione sin importar desde dónde se ejecute.
+BASE_DIR = Path(__file__).resolve().parent
+KB_PATH = BASE_DIR / os.getenv("KB_PATH", "data/FAQs_Parachute_SA_Guatemala_2026.txt")
 
 EXIT_WORDS = {"bye", "bye!", "adios", "adiós", "salir", "exit", "quit"}
 
@@ -85,7 +88,7 @@ def print_banner(kb_chars: int) -> None:
     print("=" * 75)
     print("  AGENTE DE PREGUNTAS FRECUENTES - PARACHUTE S.A. (demo)")
     print("=" * 75)
-    print(f"  Base de conocimiento : {KB_PATH}  ({kb_chars} caracteres cargados)")
+    print(f"  Base de conocimiento : {KB_PATH.name}  ({kb_chars} caracteres cargados)")
     print(f"  Proveedor            : {BASE_URL}")
     print(f"  Modelo               : {MODEL}")
     print("-" * 75)
