@@ -37,11 +37,11 @@ Esa es la decisión de diseño que pide el enunciado: priorizar la rapidez del d
 ## Instalación
 
 ```bash
-git clone <url-de-este-repo>
-cd hdt3-parachute-rag
+git clone https://github.com/bianckaa/ai-hdt-3.git
+cd ai-hdt-3
 
 python -m venv .venv
-source .venv/bin/activate        # en Windows: .venv\Scripts\activate
+source .venv/bin/activate        # en PowerShell: .venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
 ```
