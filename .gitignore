@@ -1,0 +1,21 @@
+# Variables de entorno y llaves de API
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Modelos descargados por sentence-transformers / HuggingFace
+.cache/
+models/
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
