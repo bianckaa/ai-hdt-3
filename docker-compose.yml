@@ -1,0 +1,45 @@
+services:
+  pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: hdt4_pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-parachute}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-parachute}
+      POSTGRES_DB: ${POSTGRES_DB:-parachute_faqs}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-parachute} -d ${POSTGRES_DB:-parachute_faqs}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Servicio opcional para ejecutar el cargador y el agente dentro de Docker.
+  # Se activa con el perfil "app" y no arranca junto con la base de datos.
+  app:
+    build: .
+    image: hdt4_agente
+    container_name: hdt4_agente
+    profiles: ["app"]
+    depends_on:
+      pgvector:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # Dentro de la red de compose la base se alcanza por nombre de servicio.
+      POSTGRES_HOST: pgvector
+      POSTGRES_PORT: 5432
+    volumes:
+      - ./:/app
+      - hf_models:/models
+    stdin_open: true
+    tty: true
+
+volumes:
+  pgvector_data:
+  hf_models:
